@@ -56,23 +56,31 @@ const actions = {
   },
   merge(sessionId, context, entities, message, cb) {
     // Retrieve the location entity and store it into a context field
-    const loc = firstEntityValue(entities, 'location');
-    if (loc) {
-      context.loc = loc; // store it in context
+    const age = firstEntityValue(entities, 'age_of_person');
+    if (age) {
+      context.age = age; // store it in context
     }
 
     cb(context);
   },
 
   error(sessionId, context, error) {
+    console.log("hello");
     console.log(error.message);
   },
 
   // fetch-weather bot executes
-  ['fetch-weather'](sessionId, context, cb) {
+  ['fetch-age'](sessionId, context, cb) {
+    
+    //aqui eu posso fazer alguma chamada de API();
+    const newAge = context.age; 
+    context.forecast = "Você ainda está na flor da idade hehe com " + newAge + "." ;
+    cb(context);
+  },
+    ['fetch-weathers'](sessionId, context, cb) {
     // Here should go the api call, e.g.:
     // context.forecast = apiCall(context.loc)
-    context.forecast = 'sunny';
+    context.forecast = console.age;
     cb(context);
   },
 };
@@ -91,3 +99,7 @@ if (require.main === module) {
   const client = getWit();
   client.interactive();
 }
+
+
+//pageAccessToken
+//EAACTrOexprUBAOlGZBi4Gte1tZA6qNWjZB3yYccMYsZCWF1ymF01krih0MZBjkmTtSZBFVlMxOZBmMiBUeiSc7jsvqmRxN8DPiTbpzJbuUgcOLXcHMK4fDpKW5Dl2Hy9voFnriZAeXLZB6DhZC1GS5QVuK9vgLqx9wZAlCTKBfQTASLAgZDZD
